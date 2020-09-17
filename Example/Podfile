@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZYAdKit_Example' do
+  pod 'ZYAdKit', :path => '../'
+
+  target 'ZYAdKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
