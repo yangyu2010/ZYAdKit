@@ -1,0 +1,6 @@
+framework module ZYAdKit {
+  umbrella header "ZYAdKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

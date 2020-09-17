@@ -1,0 +1,6 @@
+framework module Pods_ZYAdKit_Example {
+  umbrella header "Pods-ZYAdKit_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,26 @@
+PODS:
+  - Kingfisher (5.15.1):
+    - Kingfisher/Core (= 5.15.1)
+  - Kingfisher/Core (5.15.1)
+  - ZYAdKit (0.1.0):
+    - Kingfisher
+
+DEPENDENCIES:
+  - Kingfisher
+  - ZYAdKit (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+
+EXTERNAL SOURCES:
+  ZYAdKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Kingfisher: 3260a05e78a17fdbeb2f14dd8e66ffc768491231
+  ZYAdKit: 21ee347acf8adfd13248660f4db227116c69f437
+
+PODFILE CHECKSUM: 3c795b1a0d77c1e511f4adfc3b14024e2c8d2768
+
+COCOAPODS: 1.9.1
