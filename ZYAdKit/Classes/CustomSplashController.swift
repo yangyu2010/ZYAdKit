@@ -19,25 +19,26 @@ class CustomSplashController: UIViewController {
     
     var adConfig: AdConfig?
     
+    private var timer: Timer!
+    private var currentCount = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-//        lblSubTitle.text = "addd"
-        
         guard let adConfig = adConfig else { return }
         self.iconView.image = adConfig.icon!
         self.lblTitle.text = adConfig.title!
         self.lblSubTitle.text = adConfig.subTitle!
-        
         self.imgView.kf.setImage(with: URL(string: adConfig.url!))
         
-        
-//        print(adConfig.)
-        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (Timer) in
+            if self.currentCount <= 1 {
+                Timer.invalidate()
+                self.dismiss(animated: false, completion: nil)
+            } else {
+                self.currentCount -= 1
+                self.lblCountDown.text = "\(self.currentCount)s"
+            }
+        }
     }
-
-    
-    
-
 }

@@ -78,10 +78,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-nq-eEj">
-                                                <rect key="frame" x="43" y="8" width="1" height="20"/>
+                                                <rect key="frame" x="43" y="11" width="1" height="14"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="hNA-cS-J1s"/>
+                                                    <constraint firstAttribute="height" constant="14" id="hNA-cS-J1s"/>
                                                     <constraint firstAttribute="width" constant="1" id="hkT-Y0-in2"/>
                                                 </constraints>
                                             </view>

@@ -20,7 +20,9 @@ class ViewController: UIViewController {
         config.subTitle = "抖音抖音 抖音抖音"
         config.icon = UIImage(named: "launch_icon")
         
-        AdManager.shared.showSplashAd(with: config)
+        AdManager.shared.setConfig(config)
+        
+//        AdManager.shared.showSplashAd(with: config)
         
         
     }
