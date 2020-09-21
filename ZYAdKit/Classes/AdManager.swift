@@ -25,6 +25,18 @@ public class AdManager {
         
     }
     
+    public func getPlaceholderViewController(with customView: UIView) -> UIViewController? {
+        guard adInfo != nil else { return nil }
+        
+        let sb = UIStoryboard(name: "AdKit", bundle: Bundle(for: Self.self))
+        if let vc = sb.instantiateViewController(withIdentifier: "PlaceholderViewController") as? PlaceholderViewController {            
+            vc.customView = customView
+            return vc
+        }
+        
+        return nil
+    }
+    
     public func showSplashAd() {
         // 读取本地配置
         // 判断是否可以显示
@@ -74,7 +86,7 @@ public class AdManager {
                 splash.modalPresentationStyle = .fullScreen
                 splash.adConfig = adConfig
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     if let topVc = UIApplication.topViewController() {
                         topVc.present(splash, animated: false, completion: nil)
                     }
@@ -125,6 +137,8 @@ public class AdManager {
     
     private init() {
     }
+    /// 1
+    /// 
 }
 
 

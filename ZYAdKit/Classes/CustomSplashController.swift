@@ -11,9 +11,6 @@ import Kingfisher
 class CustomSplashController: UIViewController {
 
     @IBOutlet private weak var imgView: UIImageView!
-    @IBOutlet private weak var iconView: UIImageView!
-    @IBOutlet private weak var lblTitle: UILabel!
-    @IBOutlet private weak var lblSubTitle: UILabel!
     @IBOutlet private weak var viewSkip: UIView!
     @IBOutlet private weak var lblCountDown: UILabel!
     
@@ -30,15 +27,14 @@ class CustomSplashController: UIViewController {
         super.viewDidLoad()
 
         guard let adConfig = adConfig else { return }
-        self.iconView.image = adConfig.icon!
-        self.lblTitle.text = adConfig.title!
-        self.lblSubTitle.text = adConfig.subTitle!
+//        self.iconView.image = adConfig.icon!
+//        self.lblTitle.text = adConfig.title!
+//        self.lblSubTitle.text = adConfig.subTitle!
         self.imgView.kf.setImage(with: URL(string: adConfig.url!))
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (Timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
             if self.currentCount <= 1 {
-                Timer.invalidate()
-                self.dismiss(animated: false, completion: nil)
+                self.back()
             } else {
                 self.currentCount -= 1
                 self.lblCountDown.text = "\(self.currentCount)s"
@@ -47,8 +43,21 @@ class CustomSplashController: UIViewController {
     }
     
     @IBAction func skip(_ sender: Any) {
-        timer.invalidate()
-        self.dismiss(animated: false, completion: nil)
+        self.back()
     }
     
+    
+    private func back() {
+        timer.invalidate()
+
+        if let viewController = UIApplication.shared.windows.first!.rootViewController {
+            if viewController is PlaceholderViewController {
+                let rootVc = adConfig!.rootViewController
+                UIApplication.shared.windows.first!.rootViewController = rootVc
+            } else {
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
+        
+    }
 }

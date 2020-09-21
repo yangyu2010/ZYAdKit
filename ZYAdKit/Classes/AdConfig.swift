@@ -8,9 +8,10 @@
 import UIKit
 
 public class AdConfig {
-    public var title: String!
-    public var subTitle: String!
-    public var icon: UIImage?
+//    public var title: String!
+//    public var subTitle: String!
+//    public var icon: UIImage?
+    public var rootViewController: UIViewController!
     
     public var duration = 5
     public var showSkipButton = true
