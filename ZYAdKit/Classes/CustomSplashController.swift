@@ -22,6 +22,10 @@ class CustomSplashController: UIViewController {
     private var timer: Timer!
     private var currentCount = 5
     
+    deinit {
+        debugPrint("CustomSplashController deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +35,7 @@ class CustomSplashController: UIViewController {
         self.lblSubTitle.text = adConfig.subTitle!
         self.imgView.kf.setImage(with: URL(string: adConfig.url!))
         
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (Timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (Timer) in
             if self.currentCount <= 1 {
                 Timer.invalidate()
                 self.dismiss(animated: false, completion: nil)
@@ -41,4 +45,10 @@ class CustomSplashController: UIViewController {
             }
         }
     }
+    
+    @IBAction func skip(_ sender: Any) {
+        timer.invalidate()
+        self.dismiss(animated: false, completion: nil)
+    }
+    
 }
