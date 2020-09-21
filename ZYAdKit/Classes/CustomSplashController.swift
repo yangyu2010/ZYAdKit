@@ -55,7 +55,13 @@ class CustomSplashController: UIViewController {
                 let rootVc = adConfig!.rootViewController
                 UIApplication.shared.windows.first!.rootViewController = rootVc
             } else {
-                self.dismiss(animated: false, completion: nil)
+                
+                var vc : UIViewController = self
+                while((vc.presentingViewController) != nil) {
+                    vc = vc.presentingViewController!;
+                }
+                vc.dismiss(animated: false, completion: nil)
+                
             }
         }
         
