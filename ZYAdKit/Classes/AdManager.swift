@@ -28,9 +28,14 @@ public class AdManager {
     public func getPlaceholderViewController(with customView: UIView) -> UIViewController? {
         guard adInfo != nil else { return nil }
         
-        let sb = UIStoryboard(name: "AdKit", bundle: Bundle(for: Self.self))
+        let podBundle = Bundle(for: Self.self)
+        let path = podBundle.path(forResource: "ZYAdKit", ofType: "bundle")!
+        let bundle = Bundle(path: path)
+        let sb = UIStoryboard(name: "ZYAdKit", bundle: bundle)
         if let vc = sb.instantiateViewController(withIdentifier: "PlaceholderViewController") as? PlaceholderViewController {            
             vc.customView = customView
+            vc.adConfig = adConfig
+            vc.adInfo = adInfo
             return vc
         }
         

@@ -20,6 +20,6 @@ public class AdConfig {
     public var url: String?
     
     public init() {
-        
+    
     }
 }
