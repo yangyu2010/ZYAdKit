@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import Kingfisher
 
 class PlaceholderViewController: UIViewController {
 
@@ -107,15 +108,26 @@ class PlaceholderViewController: UIViewController {
         }
         
         let ad = source[current_splash_index]
-        if let url = ad["url"] as? String,
+        if let urlString = ad["url"] as? String,
             let link = ad["link"] as? String {
-            adConfig?.url = url
+            adConfig?.url = urlString
             adConfig?.link = link
             
             // 更新index
             current_splash_index += 1
             splashConfig["index"] = current_splash_index
             UserDefaults.standard.setValue(splashConfig, forKey: "kAdSplashInfo")
+            
+            let cached = ImageCache.default.isCached(forKey: urlString)
+            if cached == false {
+                if let url = URL(string: urlString) {
+                    KingfisherManager.shared.retrieveImage(with: url) { (result) in
+                        
+                    }
+                }
+                back()
+                return
+            }
             
             let podBundle = Bundle(for: Self.self)
             let path = podBundle.path(forResource: "ZYAdKit", ofType: "bundle")!
@@ -157,13 +169,15 @@ class PlaceholderViewController: UIViewController {
     }
     
     private func back() {
-
+        
         if let viewController = UIApplication.shared.windows.first!.rootViewController {
             if viewController is PlaceholderViewController {
                 let rootVc = adConfig!.rootViewController
                 UIApplication.shared.windows.first!.rootViewController = rootVc
             } else {
-                self.dismiss(animated: false, completion: nil)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: false, completion: nil)
+                }
             }
         }
         

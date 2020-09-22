@@ -33,8 +33,9 @@ public class AdManager {
     }
     
     public func getPlaceholderViewController(with customView: UIView) -> UIViewController? {
-        guard adInfo != nil else { return nil }
         self.customView = customView
+
+        guard adInfo != nil else { return nil }
         
         let podBundle = Bundle(for: Self.self)
         let path = podBundle.path(forResource: "ZYAdKit", ofType: "bundle")!
@@ -84,7 +85,8 @@ public class AdManager {
     }
     
     @objc private func applicationBecomeActive() {
-        
+        guard adInfo != nil else { return }
+
         let podBundle = Bundle(for: Self.self)
         let path = podBundle.path(forResource: "ZYAdKit", ofType: "bundle")!
         let bundle = Bundle(path: path)
@@ -98,7 +100,9 @@ public class AdManager {
             vc.adInfo = adInfo
             vc.modalPresentationStyle = .fullScreen
             
-            topVc.present(vc, animated: false, completion: nil)
+            DispatchQueue.main.async {
+                topVc.present(vc, animated: false, completion: nil)
+            }
         }
     }
 }
