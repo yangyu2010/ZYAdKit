@@ -21,6 +21,10 @@ class PlaceholderViewController: UIViewController {
         super.viewDidLoad()
 
         debugPrint("PlaceholderViewController viewDidLoad")
+        guard let customView = customView else {
+            back()
+            return
+        }
         
         customView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(customView)
@@ -29,14 +33,8 @@ class PlaceholderViewController: UIViewController {
         customView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         customView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
-
-//        AdManager.shared.showSplashAd()
-        
-        
         guard let adInfo = adInfo,
-            let splashInfo = adInfo["开屏页广告"] as? [[String: Any]],
-            let firstAd = splashInfo.first,
-            let type = firstAd["type"] as? Int
+            let type = adInfo["type"] as? Int
             else {
                 back()
                 return
@@ -44,7 +42,7 @@ class PlaceholderViewController: UIViewController {
         
         if type == 1 {
             // 自定义广告
-            guard let source = firstAd["source"] as? [[String: Any]] else {
+            guard let source = adInfo["source"] as? [[String: Any]] else {
                 back()
                 return
             }
@@ -52,8 +50,8 @@ class PlaceholderViewController: UIViewController {
             
         } else if type == 2 {
             // admob
-
-            guard let source = firstAd["source"] as? [String: Any], let key = source["key"] as? String else {
+            guard let source = adInfo["source"] as? [String: Any],
+                let key = source["key"] as? String else {
                 back()
                 return
             }
