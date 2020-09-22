@@ -31,6 +31,10 @@ class CustomSplashController: UIViewController {
 //        self.lblTitle.text = adConfig.title!
 //        self.lblSubTitle.text = adConfig.subTitle!
         self.imgView.kf.setImage(with: URL(string: adConfig.url!))
+        self.imgView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(jump))
+        self.imgView.addGestureRecognizer(tap)
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
             if self.currentCount <= 1 {
@@ -46,6 +50,12 @@ class CustomSplashController: UIViewController {
         self.back()
     }
     
+    @objc private func jump() {
+        guard let link = adConfig?.link,
+            let url = URL(string: link) else { return }
+        self.back()
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
     
     private func back() {
         timer.invalidate()
