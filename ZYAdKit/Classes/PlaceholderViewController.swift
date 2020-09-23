@@ -197,11 +197,11 @@ extension PlaceholderViewController: GADInterstitialDelegate {
     }
     
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-        print("interstitialWillDismissScreen 1111")
+//        print("interstitialWillDismissScreen 1111")
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        print("interstitialDidDismissScreen 222")
+//        print("interstitialDidDismissScreen 222")
         self.back()
     }
     
