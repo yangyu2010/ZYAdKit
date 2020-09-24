@@ -16,9 +16,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let config = AdConfig()
-        config.title = "抖音"
-        config.subTitle = "抖音抖音 抖音抖音"
-        config.icon = UIImage(named: "launch_icon")
+//        config.title = "抖音"
+//        config.subTitle = "抖音抖音 抖音抖音"
+//        config.icon = UIImage(named: "launch_icon")
         
         AdManager.shared.setConfig(config)
         

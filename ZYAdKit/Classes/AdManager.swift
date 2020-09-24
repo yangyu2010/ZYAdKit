@@ -81,7 +81,7 @@ public class AdManager {
     }
     
     private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationBecomeActive), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationBecomeActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     @objc private func applicationBecomeActive() {
