@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-public class AdManager {
+@objcMembers public class AdManager: NSObject {
     public static let shared = AdManager()
     private var adConfig: AdConfig?
     private var adInfo: [String: Any]?
@@ -80,7 +80,9 @@ public class AdManager {
         
     }
     
-    private init() {
+    private override init() {
+        super.init()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(applicationBecomeActive), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     

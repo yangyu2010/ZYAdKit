@@ -44,3 +44,14 @@ UserDefaults.standard.synchronize()
 
 AdManager.shared.cacheDatas()
 ```
+
+##3.在 info.plist 里设置admob key
+```
+<key>GADApplicationIdentifier</key>
+<string>ca-app-pub-3940256099942544~1458002511</string>
+```
+
+
+注意项
+##1. `Main Interface` 要清空, 从代码加载
+![图1](Xnip2020-09-24_18-04-49.jpg)

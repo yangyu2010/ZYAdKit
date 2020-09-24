@@ -9,7 +9,7 @@ import UIKit
 import GoogleMobileAds
 import Kingfisher
 
-class PlaceholderViewController: UIViewController {
+@objcMembers class PlaceholderViewController: UIViewController {
 
     var customView: UIView!
     var adConfig: AdConfig?

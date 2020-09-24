@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AdConfig {
+@objcMembers public class AdConfig: NSObject {
 //    public var title: String!
 //    public var subTitle: String!
 //    public var icon: UIImage?
@@ -19,7 +19,7 @@ public class AdConfig {
     public var link: String?
     public var url: String?
     
-    public init() {
+    public override init() {
     
     }
 }
