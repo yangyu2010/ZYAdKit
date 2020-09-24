@@ -25,7 +25,7 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Yu Yang' => 'yangyu2010@aliyun.com' }
-  s.source           = { :git => 'https://gitee.com/Young2010/zyadkit.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/yangyu2010/ZYAdKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
