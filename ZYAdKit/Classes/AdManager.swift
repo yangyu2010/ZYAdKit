@@ -88,7 +88,12 @@ import Kingfisher
     
     @objc private func applicationBecomeActive() {
         guard adInfo != nil else { return }
-
+        
+        if UserDefaults.standard.bool(forKey: "kAdSkipOne") == true {
+            UserDefaults.standard.setValue(false, forKey: "kAdSkipOne")
+            return
+        }
+        
         let podBundle = Bundle(for: Self.self)
         let path = podBundle.path(forResource: "ZYAdKit", ofType: "bundle")!
         let bundle = Bundle(path: path)

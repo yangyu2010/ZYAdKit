@@ -54,6 +54,8 @@ class CustomSplashController: UIViewController {
         guard let link = adConfig?.link,
             let url = URL(string: link) else { return }
         self.back()
+        UserDefaults.standard.setValue(true, forKey: "kAdSkipOne")
+        UserDefaults.standard.synchronize()
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

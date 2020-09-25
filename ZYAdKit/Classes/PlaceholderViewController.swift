@@ -40,7 +40,7 @@ import Kingfisher
                 back()
                 return
         }
-        
+
         if type == 1 {
             // 自定义广告
             guard let source = adInfo["source"] as? [[String: Any]] else {
@@ -207,5 +207,11 @@ extension PlaceholderViewController: GADInterstitialDelegate {
     
     func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
         self.back()
+    }
+    
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+//        print("interstitialWillLeaveApplication 3333")
+        UserDefaults.standard.setValue(true, forKey: "kAdSkipOne")
+        UserDefaults.standard.synchronize()
     }
 }
