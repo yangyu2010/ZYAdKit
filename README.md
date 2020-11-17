@@ -5,8 +5,24 @@
 [![License](https://img.shields.io/cocoapods/l/ZYAdKit.svg?style=flat)](https://cocoapods.org/pods/ZYAdKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZYAdKit.svg?style=flat)](https://cocoapods.org/pods/ZYAdKit)
 
+##1.从后台读取配置
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	[ServiceApi getConfig];
+}
+```
 
-##1.设置config
+![](Xnip2020-11-17_10-58-39.jpg)
+
+```
+UserDefaults.standard.setValue(json, forKey: "kAdInfo")
+UserDefaults.standard.synchronize()
+
+AdManager.shared.cacheDatas()
+```
+
+
+##2.设置config
 
 ![图1](Xnip2020-09-24_11-56-53.jpg)
 
@@ -36,14 +52,6 @@ window?.makeKeyAndVisible()
 
 ```
 
-##2.获取到配置保存到本地. 然后缓存数据
-
-```
-UserDefaults.standard.setValue(json, forKey: "kAdInfo")
-UserDefaults.standard.synchronize()
-
-AdManager.shared.cacheDatas()
-```
 
 ##3.在 info.plist 里设置admob key
 ```
