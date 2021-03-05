@@ -7,12 +7,14 @@
 
 import UIKit
 import Kingfisher
+import GoogleMobileAds
 
 @objcMembers public class AdManager: NSObject {
     public static let shared = AdManager()
     private var adConfig: AdConfig?
     private var adInfo: [String: Any]?
     private var customView: UIView?
+    private var isVip: Bool = false
     
     public func setConfig(_ config: AdConfig) {
         adConfig = config
@@ -32,6 +34,7 @@ import Kingfisher
         }
     }
     
+    @discardableResult
     public func getPlaceholderViewController(with customView: UIView) -> UIViewController? {
         self.customView = customView
 
@@ -49,6 +52,10 @@ import Kingfisher
         }
         
         return nil
+    }
+    
+    public func clearCache() {
+        isVip = true
     }
     
     public func cacheDatas() {
@@ -88,6 +95,7 @@ import Kingfisher
     
     @objc private func applicationBecomeActive() {
         guard adInfo != nil else { return }
+        guard isVip == false else { return }
         
         if UserDefaults.standard.bool(forKey: "kAdSkipOne") == true {
             UserDefaults.standard.setValue(false, forKey: "kAdSkipOne")
@@ -99,7 +107,11 @@ import Kingfisher
         let bundle = Bundle(path: path)
         let sb = UIStoryboard(name: "ZYAdKit", bundle: bundle)
 
+        /// 当前顶部控制器是广告时 不再叠加
+        // NSStringFromClass(topVc.classForCoder) != "GADFullScreenAdViewController",
+
         if let topVc = UIApplication.topViewController(),
+           NSStringFromClass(topVc.classForCoder) != "GADFullScreenAdViewController",
             let vc = sb.instantiateViewController(withIdentifier: "PlaceholderViewController") as? PlaceholderViewController {
 
             vc.customView = customView

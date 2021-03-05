@@ -18,10 +18,13 @@ import Kingfisher
     private var interstitial: GADInterstitial!
     private var current_splash_index = 0
 
+    deinit {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        debugPrint("PlaceholderViewController viewDidLoad")
         guard let customView = customView else {
             back()
             return
@@ -147,7 +150,13 @@ import Kingfisher
     }
     
     private func loadGoogleAd(with key: String) {
-        interstitial = GADInterstitial(adUnitID: key)
+        #if DEBUG
+            interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        #else
+            interstitial = GADInterstitial(adUnitID: key)
+        #endif
+        
+//        interstitial = GADInterstitial(adUnitID: key)
         let request = GADRequest()
         interstitial.load(request)
         interstitial.delegate = self
@@ -169,7 +178,8 @@ import Kingfisher
     }
     
     private func back() {
-        
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+
         if let viewController = UIApplication.shared.windows.first!.rootViewController {
             if viewController is PlaceholderViewController {
                 let rootVc = adConfig!.rootViewController
@@ -192,8 +202,13 @@ extension PlaceholderViewController: GADInterstitialDelegate {
     }
     
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        NSObject.cancelPreviousPerformRequests(withTarget: self)
-        ad.present(fromRootViewController: self)
+        if self.presentedViewController != nil {
+            self.presentedViewController?.dismiss(animated: false, completion: {
+            })
+        } else {
+            NSObject.cancelPreviousPerformRequests(withTarget: self)
+            ad.present(fromRootViewController: self)
+        }
     }
     
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
@@ -211,6 +226,7 @@ extension PlaceholderViewController: GADInterstitialDelegate {
     
     func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
 //        print("interstitialWillLeaveApplication 3333")
+        self.back()
         UserDefaults.standard.setValue(true, forKey: "kAdSkipOne")
         UserDefaults.standard.synchronize()
     }
