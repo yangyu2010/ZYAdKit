@@ -150,13 +150,8 @@ import Kingfisher
     }
     
     private func loadGoogleAd(with key: String) {
-        #if DEBUG
-            interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        #else
-            interstitial = GADInterstitial(adUnitID: key)
-        #endif
         
-//        interstitial = GADInterstitial(adUnitID: key)
+        interstitial = GADInterstitial(adUnitID: key)
         let request = GADRequest()
         interstitial.load(request)
         interstitial.delegate = self
