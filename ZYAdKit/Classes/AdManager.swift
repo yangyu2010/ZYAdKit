@@ -54,8 +54,8 @@ import GoogleMobileAds
         return nil
     }
     
-    public func clearCache() {
-        isVip = true
+    public func updateVipStatus(_ isVip: Bool) {
+        self.isVip = isVip
     }
     
     public func cacheDatas() {

@@ -19,17 +19,17 @@ import Kingfisher
     private var current_splash_index = 0
 
     deinit {
-        
+        print("deinit called233223")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let customView = customView else {
             back()
             return
         }
-        
+
         customView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(customView)
         customView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -51,7 +51,7 @@ import Kingfisher
                 return
             }
             self.loadCustomAd(with: source)
-            
+
         } else if type == 2 {
             // admob
             guard let source = adInfo["source"] as? [String: Any],
@@ -178,7 +178,6 @@ import Kingfisher
     }
     
     private func back() {
-        NSObject.cancelPreviousPerformRequests(withTarget: self)
 
         if let viewController = UIApplication.shared.windows.first!.rootViewController {
             if viewController is PlaceholderViewController {
