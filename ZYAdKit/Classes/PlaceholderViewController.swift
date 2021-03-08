@@ -173,6 +173,7 @@ import Kingfisher
     }
     
     private func back() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
 
         if let viewController = UIApplication.shared.windows.first!.rootViewController {
             if viewController is PlaceholderViewController {
@@ -191,7 +192,6 @@ import Kingfisher
 extension PlaceholderViewController: GADInterstitialDelegate {
     
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
-        NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.back()
     }
     
@@ -200,7 +200,6 @@ extension PlaceholderViewController: GADInterstitialDelegate {
             self.presentedViewController?.dismiss(animated: false, completion: {
             })
         } else {
-            NSObject.cancelPreviousPerformRequests(withTarget: self)
             ad.present(fromRootViewController: self)
         }
     }
@@ -220,8 +219,14 @@ extension PlaceholderViewController: GADInterstitialDelegate {
     
     func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
 //        print("interstitialWillLeaveApplication 3333")
-        self.back()
         UserDefaults.standard.setValue(true, forKey: "kAdSkipOne")
         UserDefaults.standard.synchronize()
+        
+        if self.presentedViewController != nil {
+            self.presentedViewController?.dismiss(animated: false, completion: {
+            })
+        } else {
+            self.back()
+        }
     }
 }
